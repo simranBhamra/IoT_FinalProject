@@ -1,8 +1,7 @@
 import React, {Component} from "react";
 import {Grid, GridItem, Wrap,Center,    Box} from "@chakra-ui/react";
-import {Text} from "@chakra-ui/react";
 import { Line } from 'react-chartjs-2';
-import { Divider } from "@chakra-ui/react"
+import moment from "moment";
 
 
 // const data = {
@@ -20,6 +19,17 @@ import { Divider } from "@chakra-ui/react"
   
   const options = {
     scales: {
+
+        xAxes:[
+            {
+            type: 'time',
+            time: {
+                displayFormats: {
+                    quarter: 'MMM YYYY'
+                }
+            }
+        }
+        ],
       yAxes: [
         {
           ticks: {
@@ -83,7 +93,7 @@ class DashBoard extends React.Component {
 
 
         const lineGraphInfo = {
-            labels: ['1', '2', '3', '4', '5', '8'],
+            labels: ['1', '2', '3', '4', '5', '8','9' ,'10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],
             datasets: [
               {
                 label: 'Food weight in grams',
@@ -110,7 +120,7 @@ class DashBoard extends React.Component {
                 <Grid h="100%" templateRows="repeat(auto, 1fr)"
                     gap={4}
                     backgroundColor="#4F4789"
-                    padding="10px"
+                    padding="12px"
                   >
                         
                 
@@ -163,7 +173,7 @@ class DashBoard extends React.Component {
                         <Box w="15rem" bg="#FFB17A" p="5px" borderRadius="3%" h="590px"  w ="500px" overflowY="scroll" marginBottom="60px"  >
                         <h2 style={
                             {color: "#201335"}
-                        }>Eating Log </h2>
+                        }>Eating Log: </h2>
               
                         {
                             this.state.eventHistory.map((event) => (
@@ -185,7 +195,7 @@ class DashBoard extends React.Component {
 
                                     <h3 color="#201335">
                                         {
-                                        event.time
+                                      moment(event.time).format("DD/MM/YY HH:MM:SS")
                                     }</h3>
                                     
                                     <h3>________________________________________________</h3>
