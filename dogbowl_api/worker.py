@@ -58,7 +58,7 @@ while True:
                 val = x[i]*trough_scaling
                 if val <= -baseline_threshold:
                     print(int(val),"removed at", datetime.now())
-                    level = min(Event.query.order_by(Event.id.desc()).first().level + val,0)
+                    level = max(Event.query.order_by(Event.id.desc()).first().level + val,0)
                     if level > 0:
                         new_events.append(Event(type="eating",value=-val,level=level,units = "grams"))
                 plt.plot(-x)
