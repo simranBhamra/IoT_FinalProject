@@ -1,12 +1,60 @@
 import React, {Component} from "react";
 import {Grid, GridItem, Wrap,Center,    Box} from "@chakra-ui/react";
 import {Text} from "@chakra-ui/react";
-import DisplayWeights from './components/DisplayWeights';
-import LineGraph from './components/LineGraph'; 
+import { Line } from 'react-chartjs-2';
+
+
+// const data = {
+//     labels: ['1', '2', '3', '4', '5', '8'],
+//     datasets: [
+//       {
+//         label: 'Food weight in grams',
+//         data: [12, 19, 3, 5, 2, 3],
+//         fill: false,
+//         backgroundColor: 'rgb(79, 71, 137)',
+//         borderColor: 'rgba(79, 71, 137)',
+//       },
+//     ],
+//   };
+  
+  const options = {
+    scales: {
+      yAxes: [
+        {
+          ticks: {
+            beginAtZero: true,
+          },
+        },
+      ],
+    },
+  };
+
+
+//   {
+//     this.state.eventHistory.map((event) => (
+
+//         <div key={
+//             event.id
+//         }>
+
+
+//             <h2 color="black">
+//                 {
+//                 event.value
+//             }</h2>
+
+
+//         </div>
+
+
+//     ))
+// } 
+
 
 
 // main page, componments will be arranged here
 class DashBoard extends React.Component {
+    
     constructor(props) {
         super(props);
         this.state = {
@@ -14,6 +62,8 @@ class DashBoard extends React.Component {
 
         };
     }
+
+    
 
     // get request
     getData() {
@@ -29,6 +79,29 @@ class DashBoard extends React.Component {
 
 
     render() {
+
+
+        const lineGraphInfo = {
+            labels: ['1', '2', '3', '4', '5', '8'],
+            datasets: [
+              {
+                label: 'Food weight in grams',
+                data: [],
+                backgroundColor: 'rgb(79, 71, 137)',
+                borderColor: 'rgba(79, 71, 137)'
+              }
+            ],
+          }
+      
+          {
+            this.state.eventHistory.map((event)=> (
+           
+                lineGraphInfo.datasets[0].data.push( event.value)
+          ))
+        }
+
+
+
 
         return (
             <div>
@@ -130,61 +203,21 @@ class DashBoard extends React.Component {
                     <GridItem colSpan={3}
                         bg="#FFFDED">
 
-                        <h2 style={
-                            {color: "#201335"}
-                        }>Daily Overview</h2>
+                        
+                        <Center>
+                    <Box h="800px" w="800px" paddingTop="60px"> 
+                        
+                        
+                    <h1 className='title'>Daily Overview</h1>
+    
+                <Line data={lineGraphInfo} options={options} />
 
 
-                        <LineGraph></LineGraph>
+                        </Box>
+                        </Center>
                     </GridItem>
 
-                    {/* <GridItem colSpan={4}
-                        bg="#FFFDED">
-
-                        <h2 style={
-                            {color: "#201335"}
-                        }>
-                            List</h2>
-
-                            <Wrap borderRadius="lg" bg="primary.500"
-                            templateColumns="repeat(4, 1fr)"
-                            gap={6}
-                            p="30px"
-                            width="90%">
-                                
-                            {
-                            this.state.eventHistory.map((event) => (
-
-                                <div key={
-                                    event.id
-                                }>
-
-                                    <h2 color="black">
-                                        {
-                                        event.type
-                                    }</h2>
-
-                                    <h2 color="black">
-                                        {
-                                        event.value
-                                    }</h2>
-
-                                    <h2 color="black">
-                                        {
-                                        event.time
-                                    }</h2>
-                                    
-
-                                    
-
-                                </div>
-
-
-                            ))
-                        } </Wrap>
-
-                    </GridItem> */}
-
+                  
                 </Grid>
 
             </div>
