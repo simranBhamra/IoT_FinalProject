@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Grid, GridItem, Wrap,Center,    Box} from "@chakra-ui/react";
 import {Text} from "@chakra-ui/react";
 import { Line } from 'react-chartjs-2';
+import { Divider } from "@chakra-ui/react"
 
 
 // const data = {
@@ -163,6 +164,7 @@ class DashBoard extends React.Component {
                         <h2 style={
                             {color: "#201335"}
                         }>Eating Log </h2>
+              
                         {
                             this.state.eventHistory.map((event) => (
 
@@ -170,26 +172,27 @@ class DashBoard extends React.Component {
                                     event.id
                                 }>
 
-                                    <h2 color="black">
-                                        {
+                                    <h3 color="#201335">
+                                        Event Type:  {
                                         event.type
-                                    }</h2>
+                                    }</h3>
 
-                                    <h2 color="black">
+                                    <h3 color="#201335">
+                                        Weight: 
                                         {
                                         event.value
-                                    }</h2>
+                                    }g</h3>
 
-                                    <h2 color="black">
+                                    <h3 color="#201335">
                                         {
                                         event.time
-                                    }</h2>
+                                    }</h3>
                                     
-
+                                    <h3>________________________________________________</h3>
                                     
 
                                 </div>
-
+   
 
                             ))
                         } 
