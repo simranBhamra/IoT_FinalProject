@@ -1,7 +1,9 @@
 import React, {Component} from "react";
 import {Grid, GridItem, Wrap,Center,    Box} from "@chakra-ui/react";
-import { Line } from 'react-chartjs-2';
+import { Line, Scatter } from 'react-chartjs-2';
 import moment from "moment";
+
+import Plot from 'react-plotly.js'
 
 
 // const data = {
@@ -20,16 +22,16 @@ import moment from "moment";
   const options = {
     scales: {
 
-        xAxes:[
-            {
-            type: 'time',
-            time: {
-                displayFormats: {
-                    quarter: 'MMM YYYY'
-                }
-            }
-        }
-        ],
+        // xAxes:[
+        //     {
+        //     type: 'time',
+        //     time: {
+        //         displayFormats: {
+        //             quarter: 'MMM YYYY'
+        //         }
+        //     }
+        // }
+        // ],
       yAxes: [
         {
           ticks: {
@@ -92,25 +94,7 @@ class DashBoard extends React.Component {
     render() {
 
 
-        const lineGraphInfo = {
-            labels: ['1', '2', '3', '4', '5', '8','9' ,'10','11','12','13','14','15','16','17','18','19','20','21','22','23','24'],
-            datasets: [
-              {
-                label: 'Food weight in grams',
-                data: [],
-                backgroundColor: 'rgb(79, 71, 137)',
-                borderColor: 'rgba(79, 71, 137)'
-              }
-            ],
-          }
-      
-          {
-            this.state.eventHistory.map((event)=> (
-           
-                lineGraphInfo.datasets[0].data.push( event.value)
-          ))
-        }
-
+        
 
 
 
@@ -223,7 +207,38 @@ class DashBoard extends React.Component {
                         
                     <h1 className='title'>Daily Overview</h1>
     
-                <Line data={lineGraphInfo} options={options} />
+               
+
+                <Plot
+                data={[{
+                    x:this.state.eventHistory.map(x => {
+                        return x.time;
+                      }),
+                    y:this.state.eventHistory.map(y => {
+                        return y.value;
+                      }),
+                    label:this.state.eventHistory.map(y => {
+                        return y.type;
+                      }),
+                    type:"scatter",
+                    mode:"lines+markers",
+                    marker:{
+                        color:"#4F4789",
+                        size:10
+                    },
+                    line:{
+                        width:3
+                    }
+                }]}
+                layout={{
+                    title:"Dog Bowl Usage",
+                    paper_bgcolor:"#FFFDED",
+                    plot_bgcolor:"#FFFDED",
+                    
+        
+                }}>
+
+                </Plot>
 
 
                         </Box>
