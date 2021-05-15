@@ -1,0 +1,28 @@
+{
+    "eventHistory": [
+        {
+            "id": 1,
+            "type": "eating",
+            "time": "2021-05-14T09:25:43.511Z",
+            "value": 50,
+            "level": 480,
+            "units": "grams"
+        },
+        {
+            "id": 2,
+            "type": "refill",
+            "time": "2021-05-14T09:45:23.511Z",
+            "value": 200,
+            "level": 680,
+            "units": "grams"
+        },
+        {
+            "id": 1,
+            "type": "eating",
+            "time": "2021-05-14T11:15:43.511Z",
+            "value": 100,
+            "level": 580,
+            "units": "grams"
+        }
+    ]
+}
